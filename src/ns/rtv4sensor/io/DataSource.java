@@ -4,8 +4,6 @@ public abstract class DataSource {
 	DataReceiver dataReceiver;
 	boolean isClosed = false;
 	
-
-
 	public DataSource(){
 	}
 	
