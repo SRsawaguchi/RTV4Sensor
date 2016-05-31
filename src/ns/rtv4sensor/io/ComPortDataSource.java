@@ -11,6 +11,7 @@ public class ComPortDataSource extends DataSource {
 	private static final int TIMEOUT  = 2000;
 	private static final int BAUDRAIT = 9600;
 	private static final String APP_NAME = "CPDS";
+	private static final byte   DELIMITER = '\n';
 	
 	String comPortId = "";
 	String applicationName = APP_NAME;
@@ -19,7 +20,7 @@ public class ComPortDataSource extends DataSource {
 	int    baudrait = BAUDRAIT;
 	byte[] buffer;
 	int    bufPtr = 0;
-	byte   delimiter;
+	byte   delimiter = DELIMITER;
 	
 	public ComPortDataSource(String comPortId){
 		this(null,comPortId);
