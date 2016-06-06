@@ -35,22 +35,21 @@ public class SimulateDataSource extends DataSource {
 		
 		new Thread(()->{
 			Random random = new Random();
-			while(true){
+			while(isClosed == false){
 				Calendar c    = Calendar.getInstance();
-				int      r    = random.nextInt(MAX);
+				int      r    = random.nextInt(max);
 				byte[]   data = int2byte(r);
 				
-				new Thread(()->{
-					dataReceiver.receiveData(data, c.getTimeInMillis());
+				new Thread(() -> {
+					getDataReceiver().receiveData(data, c.getTimeInMillis());
 				}).start();
 				try {
-					Thread.sleep(INTERVAL);
+					Thread.sleep(interval);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}//end while
 		}).start();
-		
 		return true;
 	}
 
