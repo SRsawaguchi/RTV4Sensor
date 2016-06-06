@@ -6,6 +6,9 @@ import java.io.InputStream;
 
 import javax.swing.JFrame;
 
+import ns.rtv4sensor.io.DataReceiver;
+import ns.rtv4sensor.io.SimulateDataSource;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -25,6 +28,31 @@ import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
 
 public class Main extends JFrame{
+	
+	public static void main(String[] args){
+		SimulateDataSource dSource = new SimulateDataSource();
+		DataReceiver receiver = new DataReceiver(){
+			@Override
+			public void receiveData(byte[] data, long time) {
+				int num = SimulateDataSource.byte2int(data);
+				System.out.println(num);
+			}
+		};
+		dSource.setDataReceiver(receiver);
+		dSource.setInterval(1000);
+		dSource.start();
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally{
+			dSource.close();
+			System.out.println("closed");
+		}
+		
+	}
+	/*
 	private static final String COM_PORT = "COM13";
 
 	private static final long serialVersionUID = 1L;
@@ -133,4 +161,5 @@ public class Main extends JFrame{
 		xUnits.add(xUnit);
 		xAxis.setStandardTickUnits(xUnits);
 	}
+	*/
 }
