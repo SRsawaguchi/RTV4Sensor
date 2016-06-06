@@ -20,6 +20,11 @@ public class SimulateDataSource extends DataSource {
 		
 		return data;
 	}
+	
+	public static int byte2int(byte[] data){
+		int num = ByteBuffer.wrap(data).getInt();
+		
+		return num;
 	}
 	
 	@Override
@@ -33,7 +38,6 @@ public class SimulateDataSource extends DataSource {
 			while(true){
 				Calendar c    = Calendar.getInstance();
 				int      r    = random.nextInt(MAX);
-				byte[]   data = ;
 				byte[]   data = int2byte(r);
 				
 				new Thread(()->{
