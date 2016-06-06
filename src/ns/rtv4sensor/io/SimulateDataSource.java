@@ -57,7 +57,35 @@ public class SimulateDataSource extends DataSource {
 	
 	@Override
 	public boolean close() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		if(isClosed){
+			return false;
+		}
+		
+		isClosed = true;
+		return true;
+	}
+
+	public long getInterval() {
+		return interval;
+	}
+
+	public void setInterval(long interval) {
+		this.interval = interval;
+	}
+
+	public int getMax() {
+		return max;
+	}
+
+	public void setMax(int max) {
+		this.max = max;
+	}
+
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
 	}
 }
