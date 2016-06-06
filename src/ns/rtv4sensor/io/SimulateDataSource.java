@@ -1,4 +1,5 @@
 package ns.rtv4sensor.io;
+import java.nio.ByteBuffer;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -13,7 +14,12 @@ public class SimulateDataSource extends DataSource {
 	int min       = MIN;
 	
 	public static byte[] int2byte(int n){
+		int        bufSize = Integer.SIZE / Byte.SIZE;
+		ByteBuffer buf     = ByteBuffer.allocate(bufSize);
+		byte[]     data    = buf.putInt(n).array();
 		
+		return data;
+	}
 	}
 	
 	@Override
@@ -28,6 +34,7 @@ public class SimulateDataSource extends DataSource {
 				Calendar c    = Calendar.getInstance();
 				int      r    = random.nextInt(MAX);
 				byte[]   data = ;
+				byte[]   data = int2byte(r);
 				
 				new Thread(()->{
 					dataReceiver.receiveData(data, c.getTimeInMillis());
